@@ -5,7 +5,7 @@ const baseUrl = 'https://flask-project-akxn.onrender.com/characters';
 
 export default function IndividualPage() {
   const { id } = useParams();
-  const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState({});
   const [toggleEdit, setToggleEdit] = useState(false);
   const [charName, setCharName] = useState('');
   const [age, setAge] = useState(0);
@@ -16,7 +16,7 @@ export default function IndividualPage() {
     const response = await fetch(`${baseUrl}/${id}`);
     const data = await response.json();
     console.log(data);
-    setCharacters(data.characters);
+    setCharacters(data);
   };
 
   useEffect(() => {
@@ -74,8 +74,9 @@ export default function IndividualPage() {
 
   return (
     <div>
-      <h1>hello</h1>
-      <h2></h2>
+      <h1>{characters.name}</h1>
+      <h2>{characters.age}</h2>
+      <h3>{characters.catch_phrase}</h3>
       <button
         onClick={() => {
           showEdit();
